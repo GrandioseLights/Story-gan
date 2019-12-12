@@ -1,5 +1,0 @@
-Running the program will create X amount of text files, X being the amount of spaces.
-
-Remember to delete all the word files before running the program again.
-
-Put training data below. More training data will give better results, but it will use up more space.x
