@@ -1,5 +1,5 @@
 import random
-training_data = open("-- data.txt", 'r').read().casefold().split()
+training_data = open("data.txt", 'r').read().casefold().split()
 data_position = 0
 first_word = ""
 sentance = ""
@@ -30,7 +30,6 @@ while data_position < len(training_data):
         
         data_position += 1
     except IndexError:
-        print("IndexError Error handled")
         break
     i = 0
     for i in unique_words:
