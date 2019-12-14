@@ -3,7 +3,7 @@ training_data = open("data.txt", 'r').read().casefold().split()
 data_position = 0
 first_word = ""
 sentance = ""
-sentance_length = 100
+sentance_length = 100 # Change this value to change the ammount of words in the output.
 word_count = 0
 unique_words = []
 thrid_list = []
@@ -31,6 +31,7 @@ while data_position < len(training_data):
         data_position += 1
     except IndexError:
         break
+    
     i = 0
     for i in unique_words:
         if i in unique_words:
@@ -104,7 +105,7 @@ while word_count < sentance_length:
                 inter(open("stored/"+third_word+"2.txt", 'r').read().casefold().split(),
                 open("stored/"+fourth_word+".txt", 'r').read().casefold().split()))))
         except:
-            print("Error handled")
+            pass
 
 
     sentance = sentance + first_word + " " + second_word + " " + third_word + " "
