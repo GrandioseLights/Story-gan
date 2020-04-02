@@ -1,115 +1,106 @@
 import random
-training_data = open("data.txt", 'r').read().casefold().split()
-data_position = 0
-first_word = ""
-sentance = ""
-sentance_length = 100 # Change this value to change the ammount of words in the output.
-word_count = 0
-unique_words = []
-thrid_list = []
-fourth_list = []
-
-def inter(lst1, lst2): 
+dataIn = open("data.txt", 'r').read().casefold().split()
+dataOut= open("Stored.txt",'w')
+def mergeA(lst1, lst2): 
     lst3 = [value for value in lst1 if value in lst2]
     return lst3
-
-while data_position < len(training_data):
+learnDict = {}
+dataLen = len(dataIn)
+index = 0
+j = 0
+length = 30
+sentance = ""
+succsess = False
+while index < len(dataIn):
+  word = dataIn[index]
+  try:
     try:
-        trained_word = training_data[data_position]
-        word_data = open("stored/"+trained_word+".txt", 'a')
-        word_data.write(training_data[data_position+1] + '\n')
-        
-        word_data = open("stored/"+trained_word+"2.txt", 'a')
-        word_data.write(training_data[data_position+2] + '\n')
-        
-        word_data = open("stored/"+trained_word+"3.txt", 'a')
-        word_data.write(training_data[data_position+3] + '\n')
-
-        word_data = open("stored/"+trained_word+"4.txt", 'a')
-        word_data.write(training_data[data_position+3] + '\n')
-        
-        data_position += 1
-    except IndexError:
-        break
-    
-    i = 0
-    for i in unique_words:
-        if i in unique_words:
-            pass
-        else:
-            unique_words.append(trained_word)
-
-data_position = 0
-
-for file_name in unique_words:
-    file_name = file_name.rstrip() #remove the trailing \n from the word in "english_words.txt".
-    try: #try to open file "x.txt"
-        opened_file = open("stored/"+file_name+".txt", 'r')
+      learnDict[str(word + "¶")] = learnDict[word + "¶"]+" "+str(dataIn[index+1])
     except:
-        pass #if no txt for the word was found
-    
-    try: #try to open file "x2.txt"
-        opened_file = open("stored/"+file_name+"2.txt", 'r')
-    except:
-       pass #if no txt for the word was found
-
-    try: #try to open file "x3.txt"
-        opened_file = open("stored/"+file_name+"3.txt", 'r')
-    except:
-        pass #if no txt for the word was found
-    
-    try: #try to open file "x4.txt"
-        opened_file = open("stored/"+file_name+"4.txt", 'r')
-    except:
-        pass #if no txt for the word was found
-
-while word_count < sentance_length:
+      learnDict[str(word + "¶")] = str(dataIn[index+1])
     try:
-        first_word = fourth_word
+      learnDict[str(word + "¶¶")] = learnDict[word + "¶¶"]+" "+str(dataIn[index+2])
     except:
-        first_word = random.choice(training_data)
-        
+      learnDict[str(word + "¶¶")] = str(dataIn[index+2])
     try:
-        second_word = random.choice(inter(open("stored/"+first_word+".txt", 'r').read().casefold().split(),
-            inter(open("stored/"+second_word+"4.txt", 'r').read().casefold().split(),
-            inter(open("stored/"+third_word+"3.txt", 'r').read().casefold().split(),
-            open("stored/"+fourth_word+"2.txt", 'r').read().casefold().split()))))
-        
-        third_word = random.choice(inter(open("stored/"+first_word+"2.txt", 'r').read().casefold().split(),
-            inter(open("stored/"+second_word+".txt", 'r').read().casefold().split(),
-            inter(open("stored/"+third_word+"4.txt", 'r').read().casefold().split(),
-            open("stored/"+fourth_word+"3.txt", 'r').read().casefold().split()))))
-
-        fourth_word = random.choice(inter(open("stored/"+first_word+"3.txt", 'r').read().casefold().split(),
-            inter(open("stored/"+second_word+"2.txt", 'r').read().casefold().split(),
-            inter(open("stored/"+third_word+".txt", 'r').read().casefold().split(),
-            open("stored/"+fourth_word+"4.txt", 'r').read().casefold().split()))))
-        
-        jump_word = random.choice(inter(open("stored/"+first_word+"4.txt", 'r').read().casefold().split(),
-            inter(open("stored/"+second_word+"3.txt", 'r').read().casefold().split(),
-            inter(open("stored/"+third_word+"2.txt", 'r').read().casefold().split(),
-            open("stored/"+fourth_word+".txt", 'r').read().casefold().split()))))
+      learnDict[str(word + "¶¶¶")] = learnDict[word + "¶¶¶"]+" "+str(dataIn[index+3])
     except:
-        try:
-            second_word = random.choice(open("stored/"+first_word+".txt", 'r').read().casefold().split())
-                                          
-            third_word = random.choice(inter(open("stored/"+first_word+"2.txt", 'r').read().casefold().split(),
-                open("stored/"+second_word+".txt", 'r').read().casefold().split()))
+      learnDict[str(word + "¶¶¶")] = str(dataIn[index+3])
+    try:
+      learnDict[str(word + "¶¶¶¶")] = learnDict[word + "¶¶¶¶"]+" "+str(dataIn[index+4])
+    except:
+      learnDict[str(word + "¶¶¶¶")] = str(dataIn[index+4])
+    try:
+      learnDict[str(word + "¶¶¶¶¶")] = learnDict[word + "¶¶¶¶¶"]+" "+str(dataIn[index+5])
+    except:
+      learnDict[str(word + "¶¶¶¶¶")] = str(dataIn[index+5])
+  except:
+    print("Error handled.")
+  index = index + 1
 
-            fourth_word = random.choice(inter(open("stored/"+first_word+"3.txt", 'r').read().casefold().split(),
-                inter(open("stored/"+second_word+"2.txt", 'r').read().casefold().split(),
-                open("stored/"+third_word+".txt", 'r').read().casefold().split())))
-        
-            jump_word = random.choice(inter(open("stored/"+first_word+"4.txt", 'r').read().casefold().split(),
-                inter(open("stored/"+second_word+"3.txt", 'r').read().casefold().split(),
-                inter(open("stored/"+third_word+"2.txt", 'r').read().casefold().split(),
-                open("stored/"+fourth_word+".txt", 'r').read().casefold().split()))))
-        except:
-            pass
+while succsess == False:
+  try:
+    word1 = random.choice(dataIn)
+    try:
+      word2 = random.choice(learnDict[word1+"¶"].split())
+    except:
+      word2 = learnDict[word1+"¶"]
+    try:
+      word3 = random.choice(mergeA(learnDict[word2+"¶"].split(),
+      learnDict[word1+"¶¶"].split()))
+    except:
+      word3 = learnDict[word1+"¶"]
+    try:
+      word4 = random.choice(mergeA(learnDict[word3+"¶"].split(),
+      mergeA(learnDict[word2+"¶¶"].split(),
+      learnDict[word1+"¶¶¶"].split())))
+    except:
+      word4 = learnDict[word1+"¶"]
+    try:
+      word5 = random.choice(mergeA(learnDict[word4+"¶"].split(),
+      mergeA(learnDict[word3+"¶¶"].split(),
+      mergeA(learnDict[word2+"¶¶¶"].split(),
+      learnDict[word1+"¶¶¶¶"].split()))))
+    except:
+      word5 = learnDict[word1+"¶"]
 
+    while j < length:
 
-    sentance = sentance + first_word + " " + second_word + " " + third_word + " "
-    
-    word_count = word_count + 3
+      word1 = random.choice(mergeA(learnDict[word5+"¶"].split(),
+      mergeA(learnDict[word4+"¶¶"].split(),
+      mergeA(learnDict[word3+"¶¶¶"].split(),
+      mergeA(learnDict[word2+"¶¶¶¶"].split(),
+      learnDict[word1+"¶¶¶¶¶"].split())))))
+
+      word2 = random.choice(mergeA(learnDict[word5+"¶¶"].split(),
+      mergeA(learnDict[word4+"¶¶¶"].split(),
+      mergeA(learnDict[word3+"¶¶¶¶"].split(),
+      mergeA(learnDict[word2+"¶¶¶¶¶"].split(),
+      learnDict[word1+"¶"].split())))))
+
+      word3 = random.choice(mergeA(learnDict[word5+"¶¶¶"].split(),
+      mergeA(learnDict[word4+"¶¶¶¶"].split(),
+      mergeA(learnDict[word3+"¶¶¶¶¶"].split(),
+      mergeA(learnDict[word2+"¶"].split(),
+      learnDict[word1+"¶¶"].split())))))
+
+      word4 = random.choice(mergeA(learnDict[word5+"¶¶¶¶"].split(),
+      mergeA(learnDict[word4+"¶¶¶¶¶"].split(),
+      mergeA(learnDict[word3+"¶"].split(),
+      mergeA(learnDict[word2+"¶¶"].split(),
+      learnDict[word1+"¶¶¶"].split())))))
+
+      word5 = random.choice(mergeA(learnDict[word5+"¶¶¶¶¶"].split(),
+      mergeA(learnDict[word4+"¶"].split(),
+      mergeA(learnDict[word3+"¶¶"].split(),
+      mergeA(learnDict[word2+"¶¶¶"].split(),
+      learnDict[word1+"¶¶¶¶"].split())))))
+
+      sentance = sentance+ word1+" "+word2+" "+word3+" "+word4+" "+word5+" "
+      j = j + 1
+    succsess = True
+  except:
+    print("Error handled.")
+    succsess = False
 
 print(sentance)
