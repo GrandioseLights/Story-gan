@@ -1,6 +1,6 @@
 import random
 dataIn = open("data.txt", 'r').read().casefold().split()
-dataOut= open("Stored.txt",'w')
+#dataOut= open("Stored.txt",'w')
 def mergeA(lst1, lst2): 
     lst3 = [value for value in lst1 if value in lst2]
     return lst3
@@ -103,4 +103,5 @@ while succsess == False:
     print("Error handled.")
     succsess = False
 
+print("Data Size: ", dataLen/1000, "KB")
 print(sentance)
