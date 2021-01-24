@@ -1,14 +1,16 @@
-#Fixed - Entries are word for word: Entries will be more random after every few merges depending on the variable used with the merge function.
+#Outputs are word for word: Output paragraphs will be more random after every few merges.
 
 ### Stuff you can change ###
-length    = 20  #This is not the number of words, it is the number of merges.
+writeOutput  = False
+length       = 20  #This is not the number of words, it is the number of merges.
 ############################
 
 import random
 import math
 import warnings
 dataIn = open("data.txt", 'r').read().casefold().split()
-#dataOut= open("Stored.txt",'w')
+dataOut= open("Stored.txt",'w')
+dataWarn1 = "Small ammounts of traning will result in less than desireable results!"
 
 lst1 = ""
 def mergeA(b, lst1, lst2 = lst1):
@@ -22,15 +24,17 @@ learnDict = {}
 dataLen = len(dataIn)
 index = 0
 j = 0
+g = ""
 sentance = ""
 succsess = False
 storyDone = False
 errorNum = 0
-g = ""
+
 
 if 500 > len(dataIn):
-  warnings.warn("Small ammounts of traning will result in less than desireable results!")
+  warnings.warn(dataWarn1)
 
+print("Leaning Basics! Just a moment...")
 while index < len(dataIn):
   word = dataIn[index]
   try:
@@ -55,7 +59,7 @@ while index < len(dataIn):
     except:
       learnDict[str(word + "¶¶¶¶¶")] = str(dataIn[index+5])
   except:
-    print("Leaning Basics! Just a moment...")
+    pass
   index = index + 1
 
 print("Time to write...")
@@ -118,14 +122,14 @@ while storyDone == False:
       learnDict[word1+"¶¶¶"].split())))))
 
       word5 = random.choice(
-      mergeA(1,learnDict[word5+"¶¶¶¶¶"].split(),
-      mergeA(2,learnDict[word4+"¶"].split(),
-      mergeA(3,learnDict[word3+"¶¶"].split(),
-      mergeA(4,learnDict[word2+"¶¶¶"].split(),
+      mergeA(2,learnDict[word5+"¶¶¶¶¶"].split(),
+      mergeA(1,learnDict[word4+"¶"].split(),
+      mergeA(1,learnDict[word3+"¶¶"].split(),
+      mergeA(1,learnDict[word2+"¶¶¶"].split(),
       learnDict[word1+"¶¶¶¶"].split())))))
 
       sentance = sentance+ word1+" "+word2+" "+word3+" "+word4+" "+word5+" "
-      print("Merge generated successfully.")
+      #print("Merge generated successfully.")
       j = j + 1
     storyDone = True
   except:
@@ -133,3 +137,8 @@ while storyDone == False:
 
 print("Finished!! Data Size: ", dataLen/1000, "KB")
 print(sentance)
+i = ""
+for x, y in learnDict.items():
+  i = i + x + " : " + y + "\n"
+if writeOutput == True:
+  dataOut.write(i)
